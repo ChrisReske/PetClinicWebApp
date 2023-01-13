@@ -1,6 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+using PetClinicWebApp.Api.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+// Database / DbContext
+// Add services to the container.
+var connString = builder.Configuration.GetConnectionString("PetClinicDbConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(connString);
+
+});
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
