@@ -6,7 +6,6 @@ using PetClinicWebApp.Api.Persistence;
 namespace PetClinicWebApp.Api.Controllers
 {
 
-    //TODO Add Logging 
     //TODO Add CustomerDto and custom mappings for 'Create', 'GET' etc
     //TODO Add unit test project and test mapper actions
     //TODO Add repository pattern to be able to test dbcontext
@@ -17,17 +16,29 @@ namespace PetClinicWebApp.Api.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<CustomersController> _logger;
 
-        public CustomersController(ApplicationDbContext context)
+        public CustomersController(
+            ApplicationDbContext context, 
+            ILogger<CustomersController> logger)
         {
-            _context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         // GET: api/Customers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
         {
-            return await _context.Customers.ToListAsync();
+            try
+            {
+                return await _context.Customers.ToListAsync();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error retrieving customers {e.Message}");
+                throw;
+            }
         }
 
         // GET: api/Customers/5
