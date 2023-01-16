@@ -8,6 +8,7 @@ namespace PetClinicWebApp.Api.Controllers
 
     //TODO Add CustomerDto and custom mappings for 'Create', 'GET' etc
     //TODO Add unit test project and test mapper actions
+    //TODO Add calculation of customer 'Age' property
     //TODO Add repository pattern to be able to test dbcontext
     //TODO Add unit test project and test controller action 
 
