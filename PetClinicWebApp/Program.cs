@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using PetClinicWebApp.Api.Interfaces;
 using PetClinicWebApp.Api.Persistence;
 using Serilog;
 
@@ -20,6 +21,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Add custom interfaces
+builder.Services.AddScoped<ICustomerMapper, ICustomerMapper>();
 
 // Add SeriLog
 builder.Host.UseSerilog((ctx, lc) =>
