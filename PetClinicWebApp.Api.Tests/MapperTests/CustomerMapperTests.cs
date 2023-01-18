@@ -1,19 +1,26 @@
-﻿using PetClinicWebApp.Api.Mappers.CustomerMapper;
+﻿using PetClinicWebApp.Api.Dto.CustomerDto;
+using PetClinicWebApp.Api.Mappers.CustomerMapper;
 
 namespace PetClinicWebApp.Api.Tests.MapperTests;
 
+[TestFixture]
 public class CustomerMapperTests
 {
-    private readonly CustomerMapper _fakeCustomerMapper;
+    private CustomerMapper _customerMapper;
 
     [SetUp]
-    public void Setup()
+    public void Init()
     {
+        _customerMapper = new CustomerMapper();
     }
 
+    #region Testing > CustomerMapper > MapCustomerReadOnlyDto2Customer
     [Test]
-    public void Test1()
+    public void MapCustomerReadOnlyDto2Customer_ParameterCustomerReadOnlyDtoIsNull_ReturnsNewAndEmptyCustomer()
     {
-        Assert.Pass();
+        var result = _customerMapper.MapCustomer2CustomerReadOnlyDto(null);
+        Assert.That(result, Is.InstanceOf<CustomerReadOnlyDto>());
     }
+
+    #endregion
 }

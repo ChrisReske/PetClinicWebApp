@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PetClinicWebApp.Api.Interfaces;
+using PetClinicWebApp.Api.Mappers.CustomerMapper;
 using PetClinicWebApp.Api.Persistence;
 using Serilog;
 
@@ -23,7 +24,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Add custom interfaces
-builder.Services.AddScoped<ICustomerMapper, ICustomerMapper>();
+builder.Services.AddScoped<ICustomerMapper, CustomerMapper>();
 
 // Add SeriLog
 builder.Host.UseSerilog((ctx, lc) =>
