@@ -8,6 +8,11 @@ public class CustomerMapper : ICustomerMapper
 {
     public Customer MapCustomerReadOnlyDto2Customer(CustomerReadOnlyDto? customerReadOnlyDto)
     {
+        if(customerReadOnlyDto is null)
+        {
+            return new Customer();
+        }
+
         return new Customer
         {
             FirstName = customerReadOnlyDto.FirstName,
