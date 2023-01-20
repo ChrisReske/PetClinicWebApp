@@ -51,4 +51,24 @@ public class CustomerMapper : ICustomerMapper
             LastChangedAt = customer.LastChangedAt
         };
     }
+
+    public List<Customer> MapCustomerReadOnlyDtos2Customers(List<CustomerReadOnlyDto>? customerReadOnlyDtos)
+    {
+        var customers = new List<Customer>();
+
+        if (customerReadOnlyDtos is null)
+        {
+            return customers;
+        }
+
+        customers.AddRange(customerReadOnlyDtos
+            .Select(MapCustomerReadOnlyDto2Customer));
+
+        return customers;
+    }
+
+    public List<CustomerReadOnlyDto> MapCustomers2CustomerReadOnlyDtos(List<Customer> customers)
+    {
+        throw new NotImplementedException();
+    }
 }

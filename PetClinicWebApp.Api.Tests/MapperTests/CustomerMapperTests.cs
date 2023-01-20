@@ -57,7 +57,23 @@ public class CustomerMapperTests
         Assert.That(result.FirstName, Is.EqualTo("Thomas"));
     }
 
-
     #endregion
 
+    #region Testing CustomMapper > MapCustomerReadOnlyDtos2Customers
+
+    [Test]
+    public void MapCustomerReadOnlyDtos2Customers_Parameter_ListOfCustomerReadOnlyDtoIsNull_ReturnsNewListOfCustomers()
+    {
+        var result = _customerMapper.MapCustomerReadOnlyDtos2Customers(null);
+        Assert.That(result, Is.InstanceOf<List<Customer>>());
+    }
+
+    [Test]
+    public void MapCustomerReadOnlyDtos2Customers_Parameter_ListOfCustomerReadOnlyDtoIsNull_ReturnsEmptyListOfCustomers()
+    {
+        var result = _customerMapper.MapCustomerReadOnlyDtos2Customers(null);
+        Assert.That(result, Has.Count.EqualTo(0));
+    }
+
+    #endregion
 }
