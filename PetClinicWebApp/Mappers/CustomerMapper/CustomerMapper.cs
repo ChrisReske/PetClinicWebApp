@@ -67,8 +67,18 @@ public class CustomerMapper : ICustomerMapper
         return customers;
     }
 
-    public List<CustomerReadOnlyDto> MapCustomers2CustomerReadOnlyDtos(List<Customer> customers)
+    public List<CustomerReadOnlyDto> MapCustomers2CustomerReadOnlyDtos(List<Customer>? customers)
     {
-        throw new NotImplementedException();
+        var customerReadOnlyDtos = new List<CustomerReadOnlyDto>();
+
+        if(customers is null)
+        {
+            return customerReadOnlyDtos;
+        }
+
+        customerReadOnlyDtos.AddRange(customers
+            .Select(MapCustomer2CustomerReadOnlyDto));
+        
+        return customerReadOnlyDtos;
     }
 }
