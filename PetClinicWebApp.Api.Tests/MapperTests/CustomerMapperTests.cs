@@ -73,6 +73,28 @@ public class CustomerMapperTests
     {
         var result = _customerMapper.MapCustomerReadOnlyDtos2Customers(null);
         Assert.That(result, Has.Count.EqualTo(0));
+
+    }
+
+    [Test]
+    public void MapCustomerReadOnlyDtos2Customers_ParameterListOfCustomerReadOnlyDtoIsNotNullAndContainsAtLeastOneItem_ReturnsListOfCustomersWithSameItemCountAsPassedList()
+    {
+        var fakeCustomerReadOnlyDtos = new List<CustomerReadOnlyDto>()
+        {
+            new CustomerReadOnlyDto()
+            {
+                FirstName = "Tatjana",
+                LastName = "Testova"
+            },
+            new CustomerReadOnlyDto
+            {
+                FirstName = "Timothy",
+                LastName = "Testman",
+            }
+        };
+
+        var result = _customerMapper.MapCustomerReadOnlyDtos2Customers(fakeCustomerReadOnlyDtos);
+        Assert.That(result, Has.Count.EqualTo(2));
     }
 
     #endregion
