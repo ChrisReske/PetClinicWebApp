@@ -4,7 +4,7 @@ using PetClinicWebApp.Api.Models;
 
 namespace PetClinicWebApp.Api.Mappers.CustomerMapper;
 
-public class CustomerMapper : ICustomerMapper
+public class CustomerReadOnlyMapper : ICustomerReadOnlyMapper
 {
     public Customer MapCustomerReadOnlyDto2Customer(CustomerReadOnlyDto? customerReadOnlyDto)
     {

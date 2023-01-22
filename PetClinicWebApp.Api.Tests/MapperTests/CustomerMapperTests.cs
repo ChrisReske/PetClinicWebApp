@@ -8,19 +8,19 @@ namespace PetClinicWebApp.Api.Tests.MapperTests;
 [TestFixture]
 public class CustomerMapperTests
 {
-    private CustomerMapper _customerMapper;
+    private CustomerReadOnlyMapper _customerReadOnlyMapper;
 
     [SetUp]
     public void Init()
     {
-        _customerMapper = new CustomerMapper();
+        _customerReadOnlyMapper = new CustomerReadOnlyMapper();
     }
 
-    #region Testing > CustomerMapper > MapCustomerReadOnlyDto2Customer
+    #region Testing > CustomerReadOnlyMapper > MapCustomerReadOnlyDto2Customer
     [Test]
     public void MapCustomerReadOnlyDto2Customer_ParameterCustomerIsNull_ReturnsNewAndEmptyCustomerReadOnlyDto()
     {
-        var result = _customerMapper.MapCustomer2CustomerReadOnlyDto(null);
+        var result = _customerReadOnlyMapper.MapCustomer2CustomerReadOnlyDto(null);
         Assert.That(result, Is.InstanceOf<CustomerReadOnlyDto>());
     }
 
@@ -31,18 +31,18 @@ public class CustomerMapperTests
         {
             FirstName = "Thomas"
         };
-        var result = _customerMapper.MapCustomer2CustomerReadOnlyDto(fakeCustomer);
+        var result = _customerReadOnlyMapper.MapCustomer2CustomerReadOnlyDto(fakeCustomer);
         Assert.That(result.FirstName, Is.EqualTo("Thomas"));
     }
 
     #endregion
 
-    #region Testing > CustomerMapper > MapCustomerReadOnlyDto2Customer
+    #region Testing > CustomerReadOnlyMapper > MapCustomerReadOnlyDto2Customer
 
     [Test]
     public void MapCustomerReadOnlyDto2Customer_ParameterCustomerReadOnlyDtoIsNull_ReturnsNewAndEmptyCustomer()
     {
-        var result = _customerMapper.MapCustomerReadOnlyDto2Customer(null);
+        var result = _customerReadOnlyMapper.MapCustomerReadOnlyDto2Customer(null);
         Assert.That(result, Is.InstanceOf<Customer>());
 
     }
@@ -54,7 +54,7 @@ public class CustomerMapperTests
         {
             FirstName = "Thomas"
         };
-        var result = _customerMapper.MapCustomerReadOnlyDto2Customer(fakeCustomerReadOnlyDto);
+        var result = _customerReadOnlyMapper.MapCustomerReadOnlyDto2Customer(fakeCustomerReadOnlyDto);
         Assert.That(result.FirstName, Is.EqualTo("Thomas"));
     }
 
@@ -65,14 +65,14 @@ public class CustomerMapperTests
     [Test]
     public void MapCustomerReadOnlyDtos2Customers_ParameterListOfCustomerReadOnlyDtoIsNull_ReturnsNewListOfCustomers()
     {
-        var result = _customerMapper.MapCustomerReadOnlyDtos2Customers(null);
+        var result = _customerReadOnlyMapper.MapCustomerReadOnlyDtos2Customers(null);
         Assert.That(result, Is.InstanceOf<List<Customer>>());
     }
 
     [Test]
     public void MapCustomerReadOnlyDtos2Customers_Parameter_ListOfCustomerReadOnlyDtoIsNull_ReturnsEmptyListOfCustomers()
     {
-        var result = _customerMapper.MapCustomerReadOnlyDtos2Customers(null);
+        var result = _customerReadOnlyMapper.MapCustomerReadOnlyDtos2Customers(null);
         Assert.That(result, Has.Count.EqualTo(0));
 
     }
@@ -82,7 +82,7 @@ public class CustomerMapperTests
     {
         var fakeCustomerReadOnlyDtos = CreateFakeCustomerReadOnlyDtos();
 
-        var result = _customerMapper.MapCustomerReadOnlyDtos2Customers(fakeCustomerReadOnlyDtos);
+        var result = _customerReadOnlyMapper.MapCustomerReadOnlyDtos2Customers(fakeCustomerReadOnlyDtos);
         Assert.That(result, Has.Count.EqualTo(2));
     }
 
@@ -91,7 +91,7 @@ public class CustomerMapperTests
     {
         var fakeCustomerReadOnlyDtos = CreateFakeCustomerReadOnlyDtos();
 
-        var result = _customerMapper.MapCustomerReadOnlyDtos2Customers(fakeCustomerReadOnlyDtos);
+        var result = _customerReadOnlyMapper.MapCustomerReadOnlyDtos2Customers(fakeCustomerReadOnlyDtos);
         Assert.That(result[0].FirstName, Is.EqualTo("Tatjana"));
     }
 
@@ -104,7 +104,7 @@ public class CustomerMapperTests
     {
         var fakeCustomers = CreateFakeCustomers();
 
-        var result = _customerMapper.MapCustomers2CustomerReadOnlyDtos(fakeCustomers);
+        var result = _customerReadOnlyMapper.MapCustomers2CustomerReadOnlyDtos(fakeCustomers);
         Assert.That(result[0].FirstName, Is.EqualTo("Theodore"));
     }
 
@@ -114,21 +114,21 @@ public class CustomerMapperTests
     {
         var fakeCustomers = CreateFakeCustomers();
 
-        var result = _customerMapper.MapCustomers2CustomerReadOnlyDtos(fakeCustomers);
+        var result = _customerReadOnlyMapper.MapCustomers2CustomerReadOnlyDtos(fakeCustomers);
         Assert.That(result, Has.Count.EqualTo(2));
     }
 
     [Test]
     public void MapCustomers2CustomersReadOnlyDtos_ParameterListOfCustomersIsNull_ReturnsNewListOfCustomerReadonlyDtos()
     {
-        var result = _customerMapper.MapCustomers2CustomerReadOnlyDtos(null);
+        var result = _customerReadOnlyMapper.MapCustomers2CustomerReadOnlyDtos(null);
         Assert.That(result, Is.InstanceOf<List<CustomerReadOnlyDto>>());
     }
 
     [Test]
     public void MapCustomers2CustomersReadOnlyDtos_ParameterListOfCustomersIsNull_ReturnsEmptyListOfCustomerReadonlyDtos()
     {
-        var result = _customerMapper.MapCustomers2CustomerReadOnlyDtos(null);
+        var result = _customerReadOnlyMapper.MapCustomers2CustomerReadOnlyDtos(null);
         Assert.That(result, Has.Count.EqualTo(0));
     }
 

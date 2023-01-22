@@ -3,7 +3,7 @@ using PetClinicWebApp.Api.Models;
 
 namespace PetClinicWebApp.Api.Interfaces;
 
-public interface ICustomerMapper
+public interface ICustomerReadOnlyMapper
 {
 
     #region CustomerReadOnly mappings

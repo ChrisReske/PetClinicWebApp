@@ -24,7 +24,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Add custom interfaces
-builder.Services.AddScoped<ICustomerMapper, CustomerMapper>();
+builder.Services.AddScoped<ICustomerReadOnlyMapper, CustomerReadOnlyMapper>();
 
 // Add SeriLog
 builder.Host.UseSerilog((ctx, lc) =>
