@@ -1,4 +1,5 @@
-﻿using PetClinicWebApp.Api.Dto.CustomerDto;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using PetClinicWebApp.Api.Dto.CustomerDto;
 using PetClinicWebApp.Api.Mappers.CustomerMapper;
 using PetClinicWebApp.Api.Models;
 
@@ -101,23 +102,36 @@ public class CustomerMapperTests
     [Test]
     public void MapCustomers2CustomerReadOnlyDtos_ParameterListOfCustomersIsNotNullAndHasValues_PropertiesAreProperlyMatched()
     {
-        var fakeCustomers = new List<Customer>()
-        {
-            new Customer
-            {
-                FirstName= "Theodore",
-                LastName = "Testman"
-            },
-            new Customer
-            {
-                FirstName = "Thalia",
-                LastName = "Testopulos"
-            }
-        };
+        var fakeCustomers = CreateFakeCustomers();
 
         var result = _customerMapper.MapCustomers2CustomerReadOnlyDtos(fakeCustomers);
         Assert.That(result[0].FirstName, Is.EqualTo("Theodore"));
     }
+
+
+    [Test]
+    public void MapCustomers2CustomerReadOnlyDtos_ParameterListOfCustomersIsNotNullAndContainsAtLeastOneItem_ReturnsListOfCustomerReadOnlyDtosWithSameItemCountAsPassedList()
+    {
+        var fakeCustomers = CreateFakeCustomers();
+
+        var result = _customerMapper.MapCustomers2CustomerReadOnlyDtos(fakeCustomers);
+        Assert.That(result, Has.Count.EqualTo(2));
+    }
+
+    [Test]
+    public void MapCustomers2CustomersReadOnlyDtos_ParameterListOfCustomersIsNull_ReturnsNewListOfCustomerReadonlyDtos()
+    {
+        var result = _customerMapper.MapCustomers2CustomerReadOnlyDtos(null);
+        Assert.That(result, Is.InstanceOf<List<CustomerReadOnlyDto>>());
+    }
+
+    [Test]
+    public void MapCustomers2CustomersReadOnlyDtos_ParameterListOfCustomersIsNull_ReturnsEmptyListOfCustomerReadonlyDtos()
+    {
+        var result = _customerMapper.MapCustomers2CustomerReadOnlyDtos(null);
+        Assert.That(result, Has.Count.EqualTo(0));
+    }
+
 
     #endregion
 
@@ -140,7 +154,23 @@ public class CustomerMapperTests
         };
         return fakeCustomerReadOnlyDtos;
     }
-
+    private static List<Customer> CreateFakeCustomers()
+    {
+        var fakeCustomers = new List<Customer>()
+        {
+            new Customer
+            {
+                FirstName = "Theodore",
+                LastName = "Testman"
+            },
+            new Customer
+            {
+                FirstName = "Thalia",
+                LastName = "Testopulos"
+            }
+        };
+        return fakeCustomers;
+    }
 
     #endregion
 }
